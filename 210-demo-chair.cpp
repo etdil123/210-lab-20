@@ -1,8 +1,12 @@
 #include <iostream>
 #include <iomanip>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 const int SIZE = 3;
+const int MIN = 100.00;
+const int MAX = 999.99;
 
 class Chair {
 private:
@@ -13,8 +17,12 @@ public:
     Chair() {
         prices = new double[SIZE];
         legs = 0;
-        for (int i = 0; i < SIZE; i++)
-            prices[i] = 0;
+        for (int i = 0; i < SIZE; i++){
+            // randomizing double between 100.00 and 999.99
+            double price = (rand() % (MAX - MIN + 1) + MIN) / (double) 100;
+            // storing random double into Chair prices array
+            prices[i] = price;
+        }
     }
     Chair(int l) {
         prices = new double[SIZE];
@@ -49,6 +57,7 @@ public:
 };
 
 int main() {
+    srand(time(0));
     cout << fixed << setprecision(2);
 
     //creating pointer to first chair object
