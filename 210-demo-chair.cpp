@@ -5,8 +5,10 @@
 
 using namespace std;
 const int SIZE = 3;
-const int MIN = 10000;
-const int MAX = 99999;
+const int MIN_PRICE = 10000;
+const int MAX_PRICE = 99999;
+const int MIN_LEGS = 300;
+const int MAX_LEGS = 400;
 
 class Chair {
 private:
@@ -16,10 +18,11 @@ public:
     // constructors
     Chair() {
         prices = new double[SIZE];
-        legs = 0;
+        int randL = (rand() % (MAX_LEGS - MIN_LEGS + 1) + MIN_LEGS) / (int) 100;
+        legs = randL;
         for (int i = 0; i < SIZE; i++){
             // randomizing double between 100.00 and 999.99
-            double price = (rand() % (MAX - MIN + 1) + MIN) / (double) 100;
+            double price = (rand() % (MAX_PRICE - MIN_PRICE + 1) + MIN_PRICE) / (double) 100;
             // storing random double into Chair prices array
             prices[i] = price;
         }
@@ -65,27 +68,30 @@ int main() {
     Chair *chairPtr = new Chair;
     chairPtr->setLegs(4);
     chairPtr->setPrices(121.21, 232.32, 414.14);
-    cout << "Chair created by Default Constructor - Changed with Setters" << endl;
+    cout << "\nChair created by Default Constructor - Changed with Setters" << endl;
     chairPtr->print();
+    cout << endl;
 
-    // //creating dynamic chair object with constructor
-    // Chair *livingChair = new Chair(3);
-    // livingChair->setPrices(525.25, 434.34, 252.52);
-    // livingChair->print();
-    // delete livingChair;
-    // livingChair = nullptr;
+    //creating dynamic chair object with constructor
+    // Uses updated parameter constructor - feeds in from parameter int AND array of prices  
+    double chairPricesExample[SIZE] = {312.42, 299.99, 499.99};
+    Chair *livingChair = new Chair(3, chairPricesExample);
+    cout << "Chair created by Updated Parameter Constructor" << endl;
+    livingChair->print();
+    delete livingChair;
+    livingChair = nullptr;
 
     //creating dynamic array of chair objects
     Chair *collection = new Chair[SIZE];
     for (int i = 0; i < SIZE; i++)
         collection[i].print();
 
-    collection[0].setLegs(4);
-    collection[0].setPrices(441.41, 552.52, 663.63);
-    collection[1].setLegs(4);
-    collection[1].setPrices(484.84, 959.59, 868.68);
-    collection[2].setLegs(4);
-    collection[2].setPrices(626.26, 515.15, 757.57);
+    // collection[0].setLegs(4);
+    // collection[0].setPrices(441.41, 552.52, 663.63);
+    // collection[1].setLegs(4);
+    // collection[1].setPrices(484.84, 959.59, 868.68);
+    // collection[2].setLegs(4);
+    // collection[2].setPrices(626.26, 515.15, 757.57);
     // for (int i = 0; i < SIZE; i++)
     //     collection[i].print();
     
