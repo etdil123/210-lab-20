@@ -5,8 +5,8 @@
 
 using namespace std;
 const int SIZE = 3;
-const int MIN = 100.00;
-const int MAX = 999.99;
+const int MIN = 10000;
+const int MAX = 99999;
 
 class Chair {
 private:
@@ -24,11 +24,11 @@ public:
             prices[i] = price;
         }
     }
-    Chair(int l) {
+    Chair(int l, double * p) {
         prices = new double[SIZE];
         legs = l;
         for (int i = 0; i < SIZE; i++)
-            prices[i] = 0;
+            prices[i] = p[i];
     }
 
     // setters and getters
@@ -61,28 +61,33 @@ int main() {
     cout << fixed << setprecision(2);
 
     //creating pointer to first chair object
+    // uses default constructor - changes initial values with setters
     Chair *chairPtr = new Chair;
     chairPtr->setLegs(4);
     chairPtr->setPrices(121.21, 232.32, 414.14);
+    cout << "Chair created by Default Constructor - Changed with Setters" << endl;
     chairPtr->print();
 
-    //creating dynamic chair object with constructor
-    Chair *livingChair = new Chair(3);
-    livingChair->setPrices(525.25, 434.34, 252.52);
-    livingChair->print();
-    delete livingChair;
-    livingChair = nullptr;
+    // //creating dynamic chair object with constructor
+    // Chair *livingChair = new Chair(3);
+    // livingChair->setPrices(525.25, 434.34, 252.52);
+    // livingChair->print();
+    // delete livingChair;
+    // livingChair = nullptr;
 
     //creating dynamic array of chair objects
     Chair *collection = new Chair[SIZE];
+    for (int i = 0; i < SIZE; i++)
+        collection[i].print();
+
     collection[0].setLegs(4);
     collection[0].setPrices(441.41, 552.52, 663.63);
     collection[1].setLegs(4);
     collection[1].setPrices(484.84, 959.59, 868.68);
     collection[2].setLegs(4);
     collection[2].setPrices(626.26, 515.15, 757.57);
-    for (int i = 0; i < SIZE; i++)
-        collection[i].print();
+    // for (int i = 0; i < SIZE; i++)
+    //     collection[i].print();
     
     return 0;
 }
